@@ -8,6 +8,7 @@ export default function Search() {
     const [data, setData] = React.useState('');
     let flat = true;
 
+
     const handleOnKeyPress = (e) => {
         if (e.key === "Enter") {
             setSearch(e.target.value);
@@ -22,6 +23,12 @@ export default function Search() {
 
     const handleOnChange = (e) => {
         setInput(e.target.value);
+    }
+
+    const ref = React.useRef(''); 
+    const handleOnClick = (e) => {
+        setSearch(ref.current.value);
+        setInput('');
     }
 
     React.useEffect(() => {
@@ -120,8 +127,9 @@ export default function Search() {
                                             value={input}
                                             onKeyPress={handleOnKeyPress}
                                             onChange={handleOnChange}
+                                            ref={ref}
                                         />
-                                        <InputGroup.Text id="basic-addon2">
+                                        <InputGroup.Text onClick={handleOnClick} id="basic-addon2">
                                             <i className="fa fa-search"></i>
                                         </InputGroup.Text>
                                     </InputGroup>
